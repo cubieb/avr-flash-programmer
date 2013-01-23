@@ -1,0 +1,26 @@
+#
+# This makefile is included by most of the lower level makefiles
+# to suck in the common defines.
+#
+
+###########################################
+#
+# Define Toolchain
+#
+###########################################
+CROSS_COMPILE	= avr-
+CC              = $(CROSS_COMPILE)gcc
+CXX             = $(CROSS_COMPILE)g++
+STRIP           = $(CROSS_COMPILE)strip
+OBJCOPY         = $(CROSS_COMPILE)objcopy
+OBJDUMP         = $(CROSS_COMPILE)objdump
+SIZE		= $(CROSS_COMPILE)size
+
+export CC CXX STRIP OBJCOPY OBJDUMP
+
+CFLAGS += -I$(BUILD_DIR)/include -I$(CURR_DIR)/. -I$(CURR_DIR)/include -Wall
+
+export CFLAGS
+
+generic_clean:
+	rm -f *.o *.d *.d.* core.* *.a $(EXE) $(LIB)

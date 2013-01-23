@@ -1,0 +1,28 @@
+%{
+#include <string.h>
+#include "shell.h"
+
+%}
+struct cmd_config{
+	const char *cmd;
+	int (*func)(void *data);
+}
+%struct-type
+%language=ANSI-C
+%define hash-function-name shell_hash 
+%define lookup-function-name shell_lookup
+%readonly-tables
+%global-table
+%pic
+%%
+# [cmd], [process function]
+#
+"help", show_help
+"echo", echo_string
+"upload", file_upload
+"download", file_download
+"stat", flash_read_status
+"dump", flash_dump
+"serase", flash_serase
+"berase", flash_berase
+"cerase", flash_cerase

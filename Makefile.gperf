@@ -1,0 +1,14 @@
+# use gperf to make hash lookup table
+
+GPERF		= gperf
+GPERF_FILE	= shell.gperf
+GPERF_OUTPUT	= shell_hash.h
+GPERF_FLAG	= --slot-name=cmd --output-file=$(GPERF_OUTPUT) --compare-strncmp
+
+gperf: $(GPERF_OUTPUT)
+
+$(GPERF_OUTPUT): $(GPERF_FILE)
+	$(GPERF) $(GPERF_FLAG) $(GPERF_FILE) 
+
+gperf_clean:
+	@rm -rf $(GPERF_OUTPUT)
